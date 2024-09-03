@@ -1,34 +1,28 @@
-program check_init1
-  
+program check_init1  
   use easyplot_module
   implicit none
 
   integer,parameter :: n = 100
-  real(wp), dimension(:),allocatable   :: x     !! x values
-  real(wp), dimension(:),allocatable   :: y     !! y values
-  real(wp), dimension(:),allocatable   :: yerr  !! error values for bar chart
-  real(wp), dimension(:),allocatable   :: sx    !! sin(x) values
-  real(wp), dimension(:),allocatable   :: cx    !! cos(x) values
-  real(wp), dimension(:),allocatable   :: tx    !! sin(x)*cos(x) values
-  type(mpyplot)            :: mplt   !! pytplot handler
-  integer                  :: i     !! counter
-
-  real(wp),parameter :: pi = acos(-1.0_wp)
-  real(wp),parameter :: deg2rad = pi/180.0_wp
-
-  character(len=*), parameter :: testdir = "test/"
+  real(wp), dimension(:),allocatable :: x     !! x values
+  real(wp), dimension(:),allocatable :: y     !! y values
+  real(wp), dimension(:),allocatable :: sx    !! sin(x) values
+  real(wp), dimension(:),allocatable :: cx    !! cos(x) values
+  real(wp), dimension(:),allocatable :: tx    !! sin(x)*cos(x) values
+  type(mpyplot) :: mplt   !! pytplot handler
+  integer       :: i      !! counter
 
   ! size arrays:
   allocate(x(n))
   allocate(y(n))
-  allocate(yerr(n))
   allocate(sx(n))
+  allocate(cx(n))
+  allocate(tx(n))
   
   !generate some data:
-  x    = [(real(i,wp), i=0,size(x)-1)]/5.0_wp
-  sx   = sin(x)
-  cx   = cos(x)
-  tx   = sx * cx
+  x  = [(real(i,wp), i=0,size(x)-1)]/5.0_wp
+  sx = sin(x)
+  cx = cos(x)
+  tx = sx * cx
   
   ! initialize the plot, if not present the file name (figure name), the default is 'figure_date_time.png'
   ! the parameters can be set in the initialize function
