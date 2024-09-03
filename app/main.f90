@@ -10,7 +10,7 @@ program main
   real(wp), dimension(:),allocatable   :: cx    !! cos(x) values
   real(wp), dimension(:),allocatable   :: tx    !! sin(x)*cos(x) values
   type(mpyplot)            :: mplt   !! pytplot handler
-  integer                  :: i     !! counter
+  integer                  :: i      !! counter
 
   real(wp),parameter :: pi = acos(-1.0_wp)
   real(wp),parameter :: deg2rad = pi/180.0_wp
