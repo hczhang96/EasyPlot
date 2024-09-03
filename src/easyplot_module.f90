@@ -1,4 +1,4 @@
-module mpyplot_module
+module easyplot_module
   use iso_fortran_env
   use strings_module, only: split
   implicit none
@@ -943,4 +943,4 @@ contains
 
 
   
-end module mpyplot_module
+end module easyplot_module

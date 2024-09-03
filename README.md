@@ -31,7 +31,7 @@ The following example generates a plot of the sine function:
 
 ```fortran
 program main
-  use mpyplot_module
+  use easyplot_module
   implicit none
 
   integer,parameter :: n = 100

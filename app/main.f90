@@ -1,5 +1,5 @@
 program main
-  use mpyplot_module
+  use easyplot_module
   implicit none
 
   integer,parameter :: n = 100

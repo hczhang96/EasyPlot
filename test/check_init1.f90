@@ -1,6 +1,6 @@
 program check_init1
   
-  use mpyplot_module
+  use easyplot_module
   implicit none
 
   integer,parameter :: n = 100
