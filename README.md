@@ -30,7 +30,7 @@ pyplot-fortran = { git="https://github.com/hczhang96/EasyPlot" }
 The following example generates a plot of the sine function:
 
 ```fortran
-program check_init1
+program main
   use mpyplot_module
   implicit none
 
@@ -86,7 +86,7 @@ program check_init1
   ! call mplt%show()
   call mplt%save('test.png')
   
-end program check_init1
+end program main
 
 ```
 
