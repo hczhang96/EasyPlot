@@ -40,8 +40,8 @@ program main
   real(wp), dimension(:),allocatable :: sx    !! sin(x) values
   real(wp), dimension(:),allocatable :: cx    !! cos(x) values
   real(wp), dimension(:),allocatable :: tx    !! sin(x)*cos(x) values
-  type(mpyplot) :: mplt   !! pytplot handler
-  integer       :: i      !! counter
+  type(easyplot) :: eplt   !! pytplot handler
+  integer        :: i      !! counter
 
   ! size arrays:
   allocate(x(n))
@@ -63,29 +63,29 @@ program main
   tx   = sx * cx
   
   ! initialize the plot, if not present the file name (figure name), the default is 'figure_date_time.png'
-  call mplt%initialize()
+  call eplt%initialize()
   ! if pause is not called, the plot will not be shown until the function 'show()' is called
   ! if we want to save the figure in the end, the pause function is not necessary or set to 0
-  call mplt%pause(0.d0)   
+  call eplt%pause(0.d0)   
   ! if legend is not called, the legend will not be shown
-  call mplt%legend(.false.)
+  call eplt%legend(.false.)
   ! if grad is not called, the grid will not be shown
-  call mplt%grad()
+  call eplt%grad()
   ! if hold is not called, the plot will be cleared after each plot
-  call mplt%hold()
+  call eplt%hold()
   ! if the status of hold is not set, the labels must be set before the plot
-  call mplt%labels(xlabel='xxxx', ylabel='y~~~')
-  call mplt%plot(x,sx,label='$\sin (x)$',title='$\sin (x)$',linestyle='b-o',markersize=5,linewidth=2)
-  ! call mplt%show()
+  call eplt%labels(xlabel='xxxx', ylabel='y~~~')
+  call eplt%plot(x,sx,label='$\sin (x)$',title='$\sin (x)$',linestyle='b-o',markersize=5,linewidth=2)
+  ! call eplt%show()
 
-  call mplt%labels(xlabel='XXXX', ylabel='YYYY')
-  call mplt%plot(x,cx,label='$\cos (x)$',title='$\cos (x)$',linestyle='r-o',markersize=5,linewidth=2)
-  ! call mplt%show()
+  call eplt%labels(xlabel='XXXX', ylabel='YYYY')
+  call eplt%plot(x,cx,label='$\cos (x)$',title='$\cos (x)$',linestyle='r-o',markersize=5,linewidth=2)
+  ! call eplt%show()
 
-  call mplt%labels(xlabel='', ylabel='')
-  call mplt%plot(x,tx,label='$\sin (x) \cos (x)$',title='$\sin (x) \cos (x)$',linestyle='g-o',markersize=2,linewidth=1)
-  ! call mplt%show()
-  call mplt%save('test.png')
+  call eplt%labels(xlabel='', ylabel='')
+  call eplt%plot(x,tx,label='$\sin (x) \cos (x)$',title='$\sin (x) \cos (x)$',linestyle='g-o',markersize=2,linewidth=1)
+  ! call eplt%show()
+  call eplt%save('test.png')
   
 end program main
 
