@@ -8,7 +8,7 @@ program main
   real(wp), dimension(:),allocatable :: sx    !! sin(x) values
   real(wp), dimension(:),allocatable :: cx    !! cos(x) values
   real(wp), dimension(:),allocatable :: tx    !! sin(x)*cos(x) values
-  type(mpyplot) :: mplt   !! pytplot handler
+  type(easyplot) :: mplt   !! pytplot handler
   integer       :: i      !! counter
 
   ! size arrays:

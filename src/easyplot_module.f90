@@ -12,8 +12,8 @@ module easyplot_module
   integer, parameter          :: max_int_len      = 10         !! max string length for integers
   integer, parameter          :: max_real_len     = 60         !! max string length for reals
 
-  type, public :: mpyplot 
-    !!> @brief The mpyplot class
+  type, public :: easyplot 
+    !!> @brief The easyplot class
     private
 
     character(len=15), public :: path_plot = './visuals/' !! path to save the plot
@@ -79,13 +79,13 @@ module easyplot_module
     procedure :: finish_ops               !! Some final things to add before saving or showing the figure
     procedure :: write_to_file
 
-  end type mpyplot
+  end type easyplot
 
 contains
 
   subroutine destroy(me)
 
-    class(mpyplot),intent(inout) :: me !! pyplot handler
+    class(easyplot),intent(inout) :: me !! pyplot handler
 
     if (allocated(me%header))   deallocate(me%header)
     me%header = '' !! reset the header buffer
@@ -106,7 +106,7 @@ contains
   !> @brief Add a string to header buffer.
   subroutine add_header(me, string)
 
-    class(mpyplot), intent(inout) :: me  !! pyplot handler
+    class(easyplot), intent(inout) :: me  !! pyplot handler
     character(len=*), intent(in)  :: string !! string to be added to pyplot handler buffer
 
     integer :: n_old !! current `me%header` length
@@ -131,7 +131,7 @@ contains
   !> @brief Add a string to the plot body buffer.
   subroutine add_body(me, string)
 
-    class(mpyplot), intent(inout) :: me  !! pyplot handler
+    class(easyplot), intent(inout) :: me  !! pyplot handler
     character(len=*), intent(in)  :: string !! string to be added to pyplot handler buffer
 
     integer :: n_old !! current `me%body` length
@@ -161,7 +161,7 @@ contains
   !> @brief Add a string to the rest buffer.
   subroutine add_rest(me, string)
 
-    class(mpyplot), intent(inout) :: me  !! pyplot handler
+    class(easyplot), intent(inout) :: me  !! pyplot handler
     character(len=*), intent(in)  :: string !! string to be added to pyplot handler buffer
 
     integer :: n_old !! current `me%rest` length
@@ -187,7 +187,7 @@ contains
   !> @brief Initialize the plot storage directory.
   subroutine initialize_plot_directory(me)
     implicit none
-    class(mpyplot) :: me
+    class(easyplot) :: me
     logical :: isExist
 
     inquire(file=trim(me%path_plot), exist=isExist)
@@ -210,7 +210,7 @@ contains
                          axes_labelsize, xtick_labelsize,ytick_labelsize,  &
                          ztick_labelsize )
     implicit none
-    class(mpyplot), intent(inout) :: me
+    class(easyplot), intent(inout) :: me
     character(len=*), optional, intent(in) :: filename !! file name is must be provided
     integer, intent(in), optional :: figsize(2)
     integer, intent(in), optional :: font_size
@@ -245,7 +245,7 @@ contains
   subroutine initialize_file( me, filename )
     implicit none
 
-    class(mpyplot), intent(inout) :: me
+    class(easyplot), intent(inout) :: me
     character(len=*), optional, intent(in) :: filename
     ! local variables
     character(len=50) :: name_pre, datetime
@@ -271,7 +271,7 @@ contains
                                 ytick_labelsize, ztick_labelsize )
     implicit none
 
-    class(mpyplot), intent(inout) :: me
+    class(easyplot), intent(inout) :: me
     integer, intent(in), optional :: figsize(2)
     integer, intent(in), optional :: font_size
     logical, intent(in), optional :: axis_equal
@@ -347,7 +347,7 @@ contains
                        xlim, ylim, xscale, yscale, color )
     implicit none
     
-    class(mpyplot), intent(inout) :: me
+    class(easyplot), intent(inout) :: me
     real(wp), dimension(:), intent(in) :: x, y
     character(len=*), intent(in) :: label
     character(len=*), intent(in) :: linestyle
@@ -447,7 +447,7 @@ contains
   subroutine write_to_file( me )
     implicit none
     
-    class(mpyplot), intent(inout) :: me
+    class(easyplot), intent(inout) :: me
     ! local variables
     character(len=100) :: filename
     integer :: iostat, unit_in
@@ -474,7 +474,7 @@ contains
   subroutine show_figure( me )
     implicit none
 
-    class(mpyplot), intent(inout) :: me
+    class(easyplot), intent(inout) :: me
 
     if ( me%istatus /= 0 ) then
       write(error_unit,'(A)') 'Error in show_figure: pyplot class not properly initialized.'
@@ -496,7 +496,7 @@ contains
   subroutine save_figure( me, filename )
     implicit none
 
-    class(mpyplot), intent(inout) :: me
+    class(easyplot), intent(inout) :: me
     character(len=*), intent(in), optional :: filename
 
     ! local variables
@@ -526,7 +526,7 @@ contains
   !> @brief Some final things to add before saving or showing the figure.
   subroutine finish_ops( me )
 
-    class(mpyplot),intent(inout) :: me  !! pyplot handler
+    class(easyplot),intent(inout) :: me  !! pyplot handler
     
     if (me%axis_equal) then
       if (me%mplot3d) then
@@ -573,7 +573,7 @@ contains
   subroutine set_hold( me, hold_state )
     implicit none
 
-    class(mpyplot), intent(inout) :: me
+    class(easyplot), intent(inout) :: me
     logical, optional, intent(in) :: hold_state
 
     if ( me%istatus /= 0 ) then
@@ -592,7 +592,7 @@ contains
   subroutine add_legend( me, legend )
     implicit none
 
-    class(mpyplot), intent(inout) :: me    
+    class(easyplot), intent(inout) :: me    
     logical, intent(in), optional :: legend  
 
     if ( me%istatus /= 0 ) then
@@ -611,7 +611,7 @@ contains
   subroutine add_grad( me, grad )
     implicit none
 
-    class(mpyplot), intent(inout) :: me    
+    class(easyplot), intent(inout) :: me    
     logical, intent(in), optional :: grad  
 
     if ( me%istatus /= 0 ) then
@@ -631,7 +631,7 @@ contains
   subroutine add_labels( me, xlabel, ylabel, zlabel )
     implicit none
     
-    class(mpyplot), intent(inout) :: me
+    class(easyplot), intent(inout) :: me
     character(len=*), optional, intent(in) :: xlabel, ylabel, zlabel
 
     if ( me%istatus /= 0 ) then
@@ -648,7 +648,7 @@ contains
   subroutine set_pause_time( me, pause_time )
     implicit none
 
-    class(mpyplot), intent(inout) :: me
+    class(easyplot), intent(inout) :: me
     real(wp), intent(in), optional :: pause_time
 
     if ( me%istatus /= 0 ) then
@@ -674,7 +674,7 @@ contains
 !  a temporary filename is used, and the file is deleted after it is used.
   subroutine execute(me, pyfile, python)
 
-    class(mpyplot),   intent(inout)         :: me     !! pytplot handler
+    class(easyplot),   intent(inout)         :: me     !! pytplot handler
     character(len=*), intent(in),  optional :: pyfile !! name of the python script to generate
     ! integer,          intent (out),optional :: istat  !! status output (0 means no problems)
     character(len=*), intent(in),optional   :: python !! python executable to use. (by default, this is 'python')
