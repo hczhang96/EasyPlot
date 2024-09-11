@@ -22,7 +22,7 @@ By default, the library is built with double precision (`real64`) real values. T
 
 ```fortran
 [dependencies]
-pyplot-fortran = { git="https://github.com/hczhang96/EasyPlot" }
+EasyPlot = { git="https://github.com/hczhang96/EasyPlot" }
 ```
 
 ### Example
